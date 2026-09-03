@@ -2,6 +2,7 @@ CREATE DATABASE RaceDay;
 GO 
 USE RaceDay; GO
 
+    --Creating the tables 
 CREATE TABLE Account ( 
 AccountID INT IDENTITY(1,1) , 
 UserName VARCHAR(55) NOT NULL , 
@@ -171,7 +172,7 @@ CREATE TABLE Result
         ON DELETE NO ACTION
 );
 GO
-
+-- INSERTING THE values within the DataBase 
 
 INSERT INTO Account
     (UserName, PasswordHash, UserEmail, AccountType)
