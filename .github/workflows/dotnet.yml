@@ -24,7 +24,7 @@ jobs:
           exit 1
           fi
 
-           if [ ! -f "docs/EndpointPlan.docx" ]; then
+           if [ ! -f "docs/Endpointplan.docx" ]; then
            echo "EndpointPlan.docx is missing!"
          exit 1
          fi
