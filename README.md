@@ -9,3 +9,4 @@ Participant – Can create and manage their account, browse available events, vi
 Organiser – Can create, update, and manage events and their categories. Organisers can manage participant entries and record or update race results for the events they manage.
 
 
+
