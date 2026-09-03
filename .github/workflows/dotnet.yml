@@ -19,10 +19,21 @@ jobs:
 
       - name: Check docs folder
         run: |
-          if [ ! -d "docs" ]; then
-            echo "docs folder is missing!"
-            exit 1
+         if [ ! -f "docs/ERD Diagram.png" ]; then
+         echo "ERD Diagram.png is missing!"
+          exit 1
           fi
+
+           if [ ! -f "docs/EndpointPlan.docx" ]; then
+           echo "EndpointPlan.docx is missing!"
+         exit 1
+         fi
+
+         if [ ! -f "docs/RaceDay.sql" ]; then
+         echo "RaceDay.sql is missing!"
+         exit 1
+         fi
+
 
       - name: Check required files
         run: |
