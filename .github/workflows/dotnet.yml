@@ -1,0 +1,33 @@
+name: Check Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check docs folder
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "docs folder is missing!"
+            exit 1
+          fi
+
+      - name: Check required files
+        run: |
+          test -f docs/ERD Diagram.png
+          test -f docs/EndpointPlan.docx
+          test -f docs/RaceDay.sql
+
+          echo "All required documentation files found!"
