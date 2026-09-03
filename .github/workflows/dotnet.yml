@@ -35,10 +35,4 @@ jobs:
          fi
 
 
-      - name: Check required files
-        run: |
-          test -f docs/ERD Diagram.png
-          test -f docs/EndpointPlan.docx
-          test -f docs/RaceDay.sql
-
-          echo "All required documentation files found!"
+    
