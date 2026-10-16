@@ -195,8 +195,8 @@ public async Task GetMyEntriesAsync_ParticipantDoesNotExist_ThrowsKeyNotFoundExc
             };
 
             // Act and Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => service.CreateAsync(2, dto));
+                   await Assert.ThrowsAsync<ArgumentException>(
+() => service.CreateAsync(2, dto));
         }
 
         [Fact]
