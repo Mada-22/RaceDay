@@ -1,40 +1,34 @@
 
-name: Check Documentation
+
+name: RaceDay Automated Tests
 
 on:
   push:
-    branches:
-      - main
-      - feature/raceday-api-tests
 
   pull_request:
-    branches:
-      - main
+
+  workflow_dispatch:
 
 jobs:
-  check-docs:
+  test:
+    name: Build and Run Tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Check documentation files
-        run: |
-          if [ ! -f "docs/ERD Diagram.png" ]; then
-            echo "ERD Diagram.png is missing!"
-            exit 1
-          fi
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
 
-          if [ ! -f "docs/EndpointPlan.docx" ]; then
-            echo "EndpointPlan.docx is missing!"
-            exit 1
-          fi
+      - name: Restore dependencies
+        run: dotnet restore RaceDayAPI.Tests/RaceDayAPI.Tests.csproj
 
-          if [ ! -f "docs/RaceDay.sql" ]; then
-            echo "RaceDay.sql is missing!"
-            exit 1
-          fi
+      - name: Build and Run All Tests
+        run: dotnet test RaceDayAPI.Tests/RaceDayAPI.Tests.csproj --configuration Release --no-restore --logger "console;verbosity=normal"
 
-          echo "All required documentation files exist."
+
+          
 
