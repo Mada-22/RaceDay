@@ -6,7 +6,6 @@ on:
     branches:
       - main
       - feature/raceday-api-tests
-
   pull_request:
     branches:
       - main
@@ -25,10 +24,10 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies
+      - name: Restore API dependencies
         run: dotnet restore RaceDayAPI/RaceDayAPI.csproj
 
-      - name: Build RaceDayAPI
+      - name: Build API
         run: dotnet build RaceDayAPI/RaceDayAPI.csproj --configuration Release --no-restore
 
       - name: Restore test dependencies
@@ -36,5 +35,8 @@ jobs:
 
       - name: Run tests
         run: dotnet test RaceDay.Tests/RaceDay.Tests.csproj --configuration Release --no-restore
+
+
+       
 
 
