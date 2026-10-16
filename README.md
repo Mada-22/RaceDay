@@ -11,6 +11,8 @@ Organiser – Can create, update, and manage events and their categories. Organi
 
 https://youtu.be/RemMykYtDkI
 
+Part 2 Video
+https://youtu.be/GD6SKde5TZE
 
 <img width="1892" height="982" alt="workflow" src="https://github.com/user-attachments/assets/4d5a1774-5e52-4564-80a0-e8934ebffd02" />
 
