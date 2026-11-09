@@ -9,11 +9,14 @@ RaceDay has two main roles: Participant and Organiser.
 Participant – Can create and manage their account, browse available events, view event categories, and enter events. Participants can also view their race results after an event.
 Organiser – Can create, update, and manage events and their categories. Organisers can manage participant entries and record or update race results for the events they manage.
 
+Part 1 video
 https://youtu.be/RemMykYtDkI
 
 Part 2 Video
 https://youtu.be/GD6SKde5TZE
 
+Part 3 Video
+https://youtu.be/9V3OcI_94Pc
 <img width="1892" height="982" alt="workflow" src="https://github.com/user-attachments/assets/4d5a1774-5e52-4564-80a0-e8934ebffd02" />
 
 
