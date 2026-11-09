@@ -1,18 +1,14 @@
-name: RaceDay CI
+name: RaceDay Automated Tests
 
 on:
   push:
-    branches:
-      - main
 
   pull_request:
-    branches:
-      - main
 
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  test:
     name: Build and Run Tests
     runs-on: ubuntu-latest
 
@@ -26,12 +22,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore RaceDay.sln
+        run: dotnet restore RaceDayAPI.Tests/RaceDayAPI.Tests.csproj
 
-      - name: Build solution
-        run: dotnet build RaceDay.sln --configuration Release --no-restore
-
-      - name: Run API unit tests
-        run: dotnet test RaceDayAPI.Tests/RaceDayAPI.Tests.csproj --configuration Release --no-build --logger "console;verbosity=normal"
-          
-
+      - name: Build and Run All Tests
+        run: dotnet test RaceDayAPI.Tests/RaceDayAPI.Tests.csproj --configuration Release --no-restore --logger "console;verbosity=normal"
