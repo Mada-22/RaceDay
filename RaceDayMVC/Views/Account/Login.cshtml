@@ -1,0 +1,86 @@
+﻿@model RaceDayMVC.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="auth-page">
+    <div class="auth-container">
+
+        <div class="auth-brand">
+            <span class="brand-icon">R</span>
+            <span>Race<span class="brand-highlight">Day</span></span>
+        </div>
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+                <span class="section-label">WELCOME BACK</span>
+                <h1>Welcome back.</h1>
+                <p>Sign in to continue your RaceDay journey.</p>
+            </div>
+
+            <form asp-controller="Account"
+                  asp-action="Login"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="validation-summary">
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserNameOrEmail"></label>
+
+                    <input asp-for="UserNameOrEmail"
+                           class="form-input"
+                           placeholder="Enter your username or email"
+                           autocomplete="username" />
+
+                    <span asp-validation-for="UserNameOrEmail"
+                          class="field-validation">
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+
+                    <input asp-for="Password"
+                           class="form-input"
+                           placeholder="Enter your password"
+                           autocomplete="current-password" />
+
+                    <span asp-validation-for="Password"
+                          class="field-validation">
+                    </span>
+                </div>
+
+                <button type="submit" class="auth-submit">
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+                <span>New to RaceDay?</span>
+            </div>
+
+            <a asp-controller="Account"
+               asp-action="Register"
+               class="auth-register">
+                Create an account
+            </a>
+
+        </div>
+
+        <p class="auth-footer">
+            Your next challenge starts here.
+        </p>
+
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

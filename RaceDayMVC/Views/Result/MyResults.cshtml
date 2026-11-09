@@ -1,0 +1,94 @@
+﻿@model List<RaceDayMVC.Models.ResultViewModel>
+
+@{
+    ViewData["Title"] = "My Results";
+}
+
+<div class="results-page">
+
+    <div class="results-header">
+        <h1>My Results</h1>
+        <p>Track your race performance and achievements.</p>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="results-grid">
+
+            @foreach (var result in Model)
+            {
+                <div class="result-card">
+
+                    <div class="result-card-content">
+
+                        <div class="result-heading">
+                            <h2>@result.EventName</h2>
+
+                            <span class="result-position">
+                                #@result.FinishingPosition
+                            </span>
+                        </div>
+
+                        <div class="result-information">
+
+                            <p>
+                                <span>Category</span>
+                                <strong>@result.CategoryName</strong>
+                            </p>
+
+                            <p>
+                                <span>Entry Number</span>
+                                <strong>#@result.EntryID</strong>
+                            </p>
+
+                            <p>
+                                <span>Completion Time</span>
+                                <strong>
+                                    @result.TimeCompleted.ToString(@"hh\:mm\:ss")
+                                </strong>
+                            </p>
+
+                            <p>
+                                <span>Finishing Position</span>
+                                <strong>
+                                    @result.FinishingPosition
+                                </strong>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="results-empty">
+
+            <h2>No results available yet</h2>
+
+            <p>
+                Your race results will appear here once an organizer
+                has recorded your finishing time and position.
+            </p>
+
+            <a asp-controller="Event"
+               asp-action="Index"
+               class="btn-primary">
+                Browse Events
+            </a>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+
+<section class="register-page">
+
+    <div class="register-container">
+
+        <div class="register-heading">
+            <span class="section-label">JOIN THE COMMUNITY</span>
+
+            <h1>Get started with RaceDay.</h1>
+
+            <p>
+                Whether you're looking to compete or organise,
+                there's a place for you on RaceDay.
+            </p>
+        </div>
+
+        <div class="register-options">
+
+            <!-- PARTICIPANT CARD -->
+            <div class="register-card">
+
+                <div class="register-card-top">
+                    <span class="register-number">01</span>
+                    <span class="register-badge">FOR ATHLETES</span>
+                </div>
+
+                <div class="register-icon participant-icon">
+                    P
+                </div>
+
+                <h2>I'm a Participant</h2>
+
+                <p class="register-description">
+                    Discover sporting events, challenge yourself
+                    and keep track of your achievements.
+                </p>
+
+                <ul class="register-benefits">
+                    <li>Discover upcoming sporting events</li>
+                    <li>Register for races and activities</li>
+                    <li>Track your results and performance</li>
+                    <li>Connect with the sporting community</li>
+                </ul>
+
+                <a asp-controller="Account"
+                   asp-action="RegisterParticipant"
+                   class="register-card-button">
+                    Join as a Participant
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <!-- ORGANIZER CARD -->
+            <div class="register-card organizer-card">
+
+                <div class="register-card-top">
+                    <span class="register-number">02</span>
+                    <span class="register-badge organizer-badge">
+                        FOR EVENT ORGANIZERS
+                    </span>
+                </div>
+
+                <div class="register-icon organizer-icon">
+                    O
+                </div>
+
+                <h2>I'm an Organizer</h2>
+
+                <p class="register-description">
+                    Create sporting events, manage registrations
+                    and bring participants together.
+                </p>
+
+                <ul class="register-benefits">
+                    <li>Create and manage sporting events</li>
+                    <li>Configure event categories</li>
+                    <li>Monitor participant registrations</li>
+                    <li>Record finishing times and results</li>
+                </ul>
+
+                <a asp-controller="Account"
+                   asp-action="RegisterOrganizer"
+                   class="register-card-button organizer-button">
+                    Join as an Organizer
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="register-login">
+            Already have an account?
+
+            <a asp-controller="Account"
+               asp-action="Login">
+                Sign in
+            </a>
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,139 @@
+﻿@model RaceDayMVC.Models.CategoryManagementViewModel
+
+@{
+    ViewData["Title"] = "Manage Categories";
+}
+
+<div class="organizer-dashboard">
+
+    <div class="dashboard-header">
+        <div>
+            <h1>Manage Categories</h1>
+            <p>Manage registration categories for @Model.EventName.</p>
+        </div>
+
+        <a asp-controller="Category"
+           asp-action="Create"
+           asp-route-eventId="@Model.EventID"
+           class="btn-primary">
+            Create Category
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="dashboard-panel">
+
+        <div class="dashboard-panel-header">
+            <h2>Event Categories</h2>
+            <span>@Model.Categories.Count categories</span>
+        </div>
+
+        @if (Model.Categories.Any())
+        {
+            <div class="events-grid">
+
+                @foreach (var category in Model.Categories)
+                {
+                    <article class="event-card">
+
+                        <div class="event-card-content">
+
+                            <h3>@category.CategoryName</h3>
+
+                            <div class="event-information">
+
+                                <p>
+                                    <span>Minimum Age</span>
+                                    <strong>@(category.MinimumAge?.ToString() ?? "No minimum")</strong>
+                                </p>
+
+                                <p>
+                                    <span>Maximum Age</span>
+                                    <strong>@(category.MaximumAge?.ToString() ?? "No maximum")</strong>
+                                </p>
+
+                                <p>
+                                    <span>Distance</span>
+                                    <strong>@(category.Distance?.ToString("0.##") ?? "Not specified") km</strong>
+                                </p>
+
+                                <p>
+                                    <span>Entry Fee</span>
+                                    <strong>R @category.EntryFee.ToString("0.00")</strong>
+                                </p>
+
+                            </div>
+
+                            <div class="event-card-actions">
+
+                                <a asp-controller="Category"
+                                   asp-action="Edit"
+                                   asp-route-eventId="@Model.EventID"
+                                   asp-route-categoryId="@category.CategoryID"
+                                   class="btn-primary">
+                                    Edit
+                                </a>
+
+                                <form asp-controller="Category"
+                                      asp-action="Delete"
+                                      asp-route-eventId="@Model.EventID"
+                                      asp-route-categoryId="@category.CategoryID"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to delete this category?');">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit" class="btn-danger">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="empty-state">
+                <h3>No categories yet</h3>
+                <p>Create your first category to allow participants to register for this event.</p>
+
+                <a asp-controller="Category"
+                   asp-action="Create"
+                   asp-route-eventId="@Model.EventID"
+                   class="btn-primary">
+                    Create First Category
+                </a>
+            </div>
+        }
+
+    </div>
+
+    <div class="dashboard-actions">
+        <a asp-controller="Organizer"
+           asp-action="Index"
+           class="btn-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>

@@ -1,0 +1,80 @@
+﻿```cshtml
+@model RaceDayMVC.Models.CategoryFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="event-form-page">
+    <div class="event-form-card">
+
+        <div class="event-form-header">
+            <h1>Edit Category</h1>
+            <p>Update the registration category information.</p>
+        </div>
+
+        <form asp-controller="Category" asp-action="Edit" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="EventID" />
+            <input type="hidden" asp-for="CategoryID" />
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="CategoryName">Category Name</label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MinimumAge">Minimum Age</label>
+                <input asp-for="MinimumAge" type="number" class="form-control" />
+                <span asp-validation-for="MinimumAge" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaximumAge">Maximum Age</label>
+                <input asp-for="MaximumAge" type="number" class="form-control" />
+                <span asp-validation-for="MaximumAge" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Distance">Distance (km)</label>
+                <input asp-for="Distance" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="Distance" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EntryFee">Entry Fee (R)</label>
+                <input asp-for="EntryFee" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="EntryFee" class="text-danger"></span>
+            </div>
+
+            <div class="event-form-actions">
+
+                <button type="submit" class="btn-primary">
+                    Save Changes
+                </button>
+
+                <a asp-controller="Category"
+                   asp-action="Index"
+                   asp-route-eventId="@Model.EventID"
+                   class="btn-secondary">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+```

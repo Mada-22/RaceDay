@@ -1,0 +1,140 @@
+﻿@model RaceDayMVC.Models.OrganizerRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Organizer Registration";
+}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-brand">
+            <span class="section-label">JOIN RACEDAY</span>
+            <h1>Create your organizer account.</h1>
+            <p>
+                Bring your sporting events to life.
+                Manage registrations and connect with participants.
+            </p>
+        </div>
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+                <h2>Organizer Registration</h2>
+                <p>Enter your organization and account details.</p>
+            </div>
+
+            <form asp-controller="Account"
+                  asp-action="RegisterOrganizer"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="validation-summary">
+                </div>
+
+                <h3 class="form-section-title">Account Details</h3>
+
+                <div class="form-group">
+                    <label asp-for="UserName">Username</label>
+                    <input asp-for="UserName"
+                           class="form-input"
+                           placeholder="Choose a username" />
+                    <span asp-validation-for="UserName"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserEmail">Account Email</label>
+                    <input asp-for="UserEmail"
+                           class="form-input"
+                           placeholder="you@example.com" />
+                    <span asp-validation-for="UserEmail"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password"
+                           class="form-input"
+                           placeholder="Create a password" />
+                    <span asp-validation-for="Password"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword">
+                        Confirm Password
+                    </label>
+                    <input asp-for="ConfirmPassword"
+                           class="form-input"
+                           placeholder="Confirm your password" />
+                    <span asp-validation-for="ConfirmPassword"
+                          class="field-validation"></span>
+                </div>
+
+                <h3 class="form-section-title">Organization Details</h3>
+
+                <div class="form-group">
+                    <label asp-for="OrganizationName">
+                        Organization Name
+                    </label>
+                    <input asp-for="OrganizationName"
+                           class="form-input"
+                           placeholder="Enter organization name" />
+                    <span asp-validation-for="OrganizationName"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Address">Address</label>
+                    <input asp-for="Address"
+                           class="form-input"
+                           placeholder="Organization address" />
+                    <span asp-validation-for="Address"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber">Phone Number</label>
+                    <input asp-for="PhoneNumber"
+                           class="form-input"
+                           placeholder="Enter phone number" />
+                    <span asp-validation-for="PhoneNumber"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email">
+                        Organization Contact Email
+                    </label>
+                    <input asp-for="Email"
+                           class="form-input"
+                           placeholder="Organization email" />
+                    <span asp-validation-for="Email"
+                          class="field-validation"></span>
+                </div>
+
+                <button type="submit" class="auth-submit">
+                    Create Organizer Account
+                </button>
+
+            </form>
+
+            <div class="auth-register">
+                Already have an account?
+                <a asp-controller="Account" asp-action="Login">
+                    Sign in
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

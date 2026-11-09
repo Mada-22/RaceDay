@@ -1,0 +1,88 @@
+﻿@model List<RaceDayMVC.Models.EntryViewModel>
+
+@{
+    ViewData["Title"] = "My Registrations";
+}
+
+<div class="registrations-page">
+
+    <div class="registrations-header">
+        <h1>My Registrations</h1>
+        <p>View and manage the events you have registered for.</p>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="registrations-grid">
+
+            @foreach (var entry in Model)
+            {
+                <div class="registration-card">
+
+                    <div class="registration-card-content">
+
+                        <h2>@entry.EventName</h2>
+
+                        <div class="registration-information">
+
+                            <p>
+                                <span>Entry Number</span>
+                                <strong>#@entry.EntryID</strong>
+                            </p>
+
+                            <p>
+                                <span>Category</span>
+                                <strong>@entry.CategoryName</strong>
+                            </p>
+
+                            <p>
+                                <span>Route</span>
+                                <strong>
+                                    @(entry.RouteName ?? "No route assigned")
+                                </strong>
+                            </p>
+
+                        </div>
+
+                        <div class="registration-fee">
+                            <span>Entry Fee</span>
+                            <strong>
+                                R @entry.Price.ToString("N2")
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="registrations-empty">
+
+            <h2>No registrations yet</h2>
+
+            <p>
+                You haven't registered for any events.
+                Browse available events and find your next challenge.
+            </p>
+
+            <a asp-controller="Event"
+               asp-action="Index"
+               class="btn-primary">
+                Browse Events
+            </a>
+
+        </div>
+    }
+
+</div>

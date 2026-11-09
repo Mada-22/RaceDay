@@ -1,0 +1,202 @@
+﻿@model RaceDayMVC.Models.EventViewModel
+
+@{
+    ViewData["Title"] = Model.EventName;
+}
+
+<div class="event-details-page">
+
+    <a asp-controller="Event"
+       asp-action="Index"
+       class="back-link">
+        ← Back to Events
+    </a>
+
+    <section class="event-details-header">
+
+        <div class="event-details-heading">
+            <span class="event-type">@Model.EventType</span>
+
+            <h1>@Model.EventName</h1>
+
+            <p>@Model.Description</p>
+        </div>
+
+        <div class="event-details-distance">
+            <span>Event Distance</span>
+            <strong>@Model.Distance km</strong>
+        </div>
+
+    </section>
+
+    <div class="event-details-content">
+
+        <section class="event-details-main">
+
+            <div class="details-panel">
+                <h2>Event Information</h2>
+
+                <div class="details-grid">
+
+                    <div class="detail-item">
+                        <span>Event Date</span>
+                        <strong>@Model.EventDate.ToString("dd MMMM yyyy")</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Location</span>
+                        <strong>@Model.Location</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Event Type</span>
+                        <strong>@Model.EventType</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Distance</span>
+                        <strong>@Model.Distance km</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Registration Opens</span>
+                        <strong>@Model.OpenDate.ToString("dd MMMM yyyy")</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Registration Closes</span>
+                        <strong>@Model.ClosingDate.ToString("dd MMMM yyyy")</strong>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="details-panel">
+                <h2>Organiser Information</h2>
+                <div class="details-panel">
+                    <h2>Available Categories</h2>
+
+                    @if (Model.Categories.Any())
+                    {
+                        <div class="categories-grid">
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                <div class="category-card">
+
+                                    <h3>@category.CategoryName</h3>
+
+                                    <div class="category-information">
+
+                                        <p>
+                                            <span>Entry Fee</span>
+                                            <strong>R @category.EntryFee.ToString("N2")</strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Minimum Age</span>
+                                            <strong>
+                                                @(category.MinimumAge?.ToString() ?? "No minimum")
+                                            </strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Maximum Age</span>
+                                            <strong>
+                                                @(category.MaximumAge?.ToString() ?? "No maximum")
+                                            </strong>
+                                        </p>
+
+                                        <p>
+                                            <span>Distance</span>
+                                            <strong>
+                                                @(category.Distance?.ToString("N2") ?? "Not specified") km
+                                            </strong>
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">
+                            <h3>No categories available</h3>
+                            <p>There are currently no categories for this event.</p>
+                        </div>
+                    }
+                </div>
+                <div class="detail-item">
+                    <span>Organised by</span>
+                    <strong>@Model.OrganizationName</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="details-panel registration-panel">
+            <h2>Register for this Event</h2>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+
+            @if (Model.Categories.Any())
+            {
+                <form asp-controller="Entry"
+                      asp-action="Register"
+                      method="post">
+
+                    <input type="hidden"
+                           name="EventID"
+                           value="@Model.EventID" />
+
+                    <div class="form-group">
+                        <label for="CategoryID">Select a Category</label>
+
+                        <select id="CategoryID"
+                                name="CategoryID"
+                                class="form-control"
+                                required>
+
+                            <option value="">Choose a category</option>
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.CategoryID">
+                                    @category.CategoryName -
+                                    R @category.EntryFee.ToString("N2")
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Register Now
+                    </button>
+                </form>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <p>Registration is currently unavailable because this event has no categories.</p>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>

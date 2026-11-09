@@ -1,0 +1,240 @@
+﻿@model RaceDayMVC.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Participant Dashboard";
+}
+
+<div class="dashboard-container">
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-welcome">
+        <div>
+            <span class="dashboard-label">PARTICIPANT OVERVIEW</span>
+
+            <h1>Welcome back, @Model.Profile.Name!</h1>
+            <p>Here's an overview of your RaceDay activity.</p>
+        </div>
+        <div class="dashboard-panel">
+            <div class="panel-heading">
+                <h2>Personal Information</h2>
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="dashboard-home-btn">
+                    View Profile
+                </a>
+            </div>
+
+            <div class="profile-details">
+                <div>
+                    <span>Full Name</span>
+                    <strong>@Model.Profile.Name @Model.Profile.Surname</strong>
+                </div>
+
+                <div>
+                    <span>Username</span>
+                    <strong>@Model.Profile.UserName</strong>
+                </div>
+
+                <div>
+                    <span>Email Address</span>
+                    <strong>@Model.Profile.UserEmail</strong>
+                </div>
+
+                <div>
+                    <span>Phone Number</span>
+                    <strong>@Model.Profile.PhoneNumber</strong>
+                </div>
+
+                <div>
+                    <span>Age</span>
+                    <strong>@Model.Profile.Age</strong>
+                </div>
+            </div>
+        </div>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="dashboard-home-btn">
+            Back to Home
+        </a>
+    </section>
+
+
+    <!-- Overview Cards -->
+    <section class="dashboard-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">01</div>
+            <div>
+                <p>Upcoming Events</p>
+                <h2>@Model.UpcomingEvents.Count</h2>
+                <span>Available upcoming events</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">02</div>
+            <div>
+                <p>Total Registrations</p>
+                <h2>@Model.RegistrationCount</h2>
+                <span>Your event registrations</span>
+
+                <a asp-controller="Entry"
+                   asp-action="MyEntries"
+                   class="stat-link">
+                    View Registrations
+                </a>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">03</div>
+            <div>
+                <p>Completed Races</p>
+
+                <h2>@Model.CompletedRaceCount</h2>
+
+                <span>Your recorded race results</span>
+
+                <a asp-controller="Result"
+                   asp-action="MyResults"
+                   class="stat-link">
+                    View Results
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Main Dashboard Content -->
+    <section class="dashboard-content">
+
+        <div class="dashboard-panel">
+            <div class="panel-heading">
+                <h2>Upcoming Events</h2>
+
+                <a asp-controller="Event"
+                   asp-action="Index"
+                   class="dashboard-home-btn">
+                    Explore Events
+                </a>
+            </div>
+
+            @if (Model.UpcomingEvents.Any())
+            {
+                <div class="upcoming-events-list">
+
+                    @foreach (var eventItem in Model.UpcomingEvents)
+                    {
+                        <div class="upcoming-event-card">
+
+                            <div class="event-date">
+                                <span>
+                                    @eventItem.EventDate.ToString("MMM")
+                                </span>
+
+                                <strong>
+                                    @eventItem.EventDate.ToString("dd")
+                                </strong>
+                            </div>
+
+                            <div class="event-information">
+                                <h3>@eventItem.EventName</h3>
+
+                                <p>@eventItem.Location</p>
+
+                                <div class="event-meta">
+                                    <span>@eventItem.Distance km</span>
+                                    <span>@eventItem.EventType</span>
+                                </div>
+                            </div>
+
+                            <div class="event-action">
+                                <a asp-controller="Event"
+                                   asp-action="Details"
+                                   asp-route-id="@eventItem.EventID">
+                                    View Event
+                                </a>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <div class="empty-state-icon">📅</div>
+
+                    <h3>No upcoming events</h3>
+
+                    <p>There are currently no upcoming events available.</p>
+
+                    <a asp-controller="Event"
+                       asp-action="Index"
+                       class="btn-primary">
+                        Explore Events
+                    </a>
+                </div>
+            }
+        </div>
+
+
+        <div class="dashboard-panel">
+
+            <div class="panel-heading">
+                <div>
+                    <h2>Recent Results</h2>
+                    <p>Your latest race performances.</p>
+                </div>
+            </div>
+
+            <div class="empty-state">
+                <div class="empty-state-icon">T</div>
+
+                <h3>No results available</h3>
+
+                <p>
+                    Your race results will appear here once completed.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+
+        <div class="quick-actions-heading">
+            <h2>Quick Actions</h2>
+            <p>Manage your RaceDay experience.</p>
+        </div>
+
+        <div class="quick-actions-grid">
+
+            <div class="quick-action-card">
+                <h3>Explore Events</h3>
+                <p>Discover sporting events and find your next challenge.</p>
+                <span>Coming soon</span>
+            </div>
+
+            <div class="quick-action-card">
+                <h3>My Registrations</h3>
+                <p>View and manage the events you've registered for.</p>
+                <span>Coming soon</span>
+            </div>
+
+            <div class="quick-action-card">
+                <h3>My Profile</h3>
+                <p>View and update your participant information.</p>
+                <span>Coming soon</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

@@ -1,0 +1,282 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            YOUR RACE. YOUR COMMUNITY.
+        </span>
+
+        <h1>
+            Every race has a story.
+            <span>Make yours count.</span>
+        </h1>
+
+        <p>
+            Discover sporting events, connect with fellow athletes
+            and keep track of your achievements with RaceDay.
+        </p>
+
+        <div class="hero-actions">
+
+            <a asp-controller="Account"
+               asp-action="Register"
+               class="btn-primary hero-btn">
+                Get Started
+            </a>
+
+            <a href="#how-it-works"
+               class="btn-secondary">
+                Discover How It Works
+            </a>
+
+        </div>
+
+        <div class="hero-note">
+            Whether you run, walk or cycle, there's a place for you.
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="hero-image-overlay">
+
+            <div class="visual-card">
+                <span class="visual-card-label">
+                    YOUR NEXT CHALLENGE
+                </span>
+
+                <h3>Find Your Next Race</h3>
+
+                <p>
+                    Discover events and challenge yourself.
+                </p>
+
+                <span class="visual-tag">
+                    RUN · WALK · CYCLE
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRODUCTION SECTION -->
+<section class="intro-section" id="about">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            ABOUT RACEDAY
+        </span>
+
+        <h2>
+            More than just a sporting event.
+        </h2>
+
+        <p>
+            RaceDay brings event organisers and participants
+            together through one platform. Discover events,
+            register for challenges and celebrate your progress.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES SECTION -->
+<section class="features-section" id="events">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            WHAT YOU CAN DO
+        </span>
+
+        <h2>
+            Everything you need for race day.
+        </h2>
+
+        <p>
+            From discovering your next event to reviewing
+            your results, RaceDay makes participation easier.
+        </p>
+
+    </div>
+
+    <div class="features-grid">
+
+        <!-- Discover Events -->
+        <a asp-controller="Event"
+           asp-action="Index"
+           class="feature-card feature-card-link">
+
+            <div class="feature-number">01</div>
+
+            <h3>Discover Events</h3>
+
+            <p>
+                Explore running, walking and cycling events
+                and find challenges that interest you.
+            </p>
+
+            <span class="feature-action">
+                Browse Events →
+            </span>
+
+        </a>
+
+        <!-- Register and Participate -->
+        <a asp-controller="Entry"
+           asp-action="MyEntries"
+           class="feature-card feature-card-link">
+
+            <div class="feature-number">02</div>
+
+            <h3>Register & Participate</h3>
+
+            <p>
+                Choose your event category and manage
+                your registrations in one place.
+            </p>
+
+            <span class="feature-action">
+                My Registrations →
+            </span>
+
+        </a>
+
+        <!-- Track Results -->
+        <a asp-controller="Result"
+           asp-action="MyResults"
+           class="feature-card feature-card-link">
+
+            <div class="feature-number">03</div>
+
+            <h3>Track Your Results</h3>
+
+            <p>
+                View your recorded finishing times and
+                positions after participating in events.
+            </p>
+
+            <span class="feature-action">
+                View Results →
+            </span>
+
+        </a>
+
+        <!-- Organizer Management -->
+        <article class="feature-card">
+
+            <div class="feature-number">04</div>
+
+            <h3>Manage Events</h3>
+
+            <p>
+                Organisers can create events, manage
+                categories and record participant results.
+            </p>
+
+            <span class="feature-action">
+                Organizer tools coming soon
+            </span>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS SECTION -->
+<section class="how-section" id="how-it-works">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            GET STARTED
+        </span>
+
+        <h2>
+            Your RaceDay journey starts here.
+        </h2>
+
+    </div>
+
+    <div class="steps-grid">
+
+        <div class="step">
+
+            <span class="step-number">01</span>
+
+            <h3>Create an account</h3>
+
+            <p>
+                Register as a participant or event organiser.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span class="step-number">02</span>
+
+            <h3>Explore RaceDay</h3>
+
+            <p>
+                Discover sporting events or start organising
+                your own.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span class="step-number">03</span>
+
+            <h3>Make it count</h3>
+
+            <p>
+                Participate, manage your events and review
+                your results.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <h2>
+            Ready for your next challenge?
+        </h2>
+
+        <p>
+            Join RaceDay and make every event count.
+        </p>
+
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="btn-cta">
+            Join RaceDay
+        </a>
+
+    </div>
+
+</section>

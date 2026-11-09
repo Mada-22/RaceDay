@@ -1,0 +1,218 @@
+﻿@model RaceDayMVC.Models.OrganizerDashboardViewModel
+
+@{
+    ViewData["Title"] = "Organizer Dashboard";
+}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+        <div>
+            <span class="section-label">ORGANIZER PORTAL</span>
+            <h1>Welcome, @Model.Profile.OrganizationName</h1>
+            <p>Manage your events and monitor your race activities.</p>
+        </div>
+
+        <a asp-controller="Event"
+           asp-action="Create"
+           class="btn-primary">
+            Create Event
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    
+
+    <section class="dashboard-stats">
+
+        <div class="stat-card">
+            <div>
+                <p>Total Events</p>
+                <h2>@Model.TotalEvents</h2>
+                <span>Events you have created</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div>
+                <p>Upcoming Events</p>
+                <h2>@Model.UpcomingEvents</h2>
+                <span>Events scheduled for the future</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div>
+                <p>Completed Events</p>
+                <h2>@Model.CompletedEvents</h2>
+                <span>Events that have taken place</span>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <div class="panel-heading">
+            <div>
+                <h2>Your Events</h2>
+                <p>Manage the events organised by your organisation.</p>
+            </div>
+        </div>
+
+        @if (Model.Events.Any())
+        {
+            <div class="events-grid">
+
+              
+                <div class="events-grid">
+
+                    @foreach (var eventItem in Model.Events)
+                    {
+                        <article class="event-card">
+
+                            <div class="event-card-content">
+
+                                <h3>@eventItem.EventName</h3>
+
+                                <p>@eventItem.Description</p>
+
+                                <div class="event-information">
+                                    <p>
+                                        <span>Date</span>
+                                        <strong>@eventItem.EventDate.ToString("dd MMM yyyy")</strong>
+                                    </p>
+
+                                    <p>
+                                        <span>Location</span>
+                                        <strong>@eventItem.Location</strong>
+                                    </p>
+
+                                    <p>
+                                        <span>Distance</span>
+                                        <strong>@eventItem.Distance km</strong>
+                                    </p>
+
+                                    <p>
+                                        <span>Event Type</span>
+                                        <strong>@eventItem.EventType</strong>
+                                    </p>
+                                </div>
+
+                                <div class="event-card-actions">
+
+                                    <a asp-controller="Event"
+                                       asp-action="Details"
+                                       asp-route-id="@eventItem.EventID"
+                                       class="btn-secondary">
+                                        View Details
+                                    </a>
+
+                                    <a asp-controller="Event"
+                                       asp-action="Edit"
+                                       asp-route-id="@eventItem.EventID"
+                                       class="btn-primary">
+                                        Edit Event
+                                    </a>
+
+                                    <a asp-controller="Category"
+                                       asp-action="Index"
+                                       asp-route-eventId="@eventItem.EventID"
+                                       class="btn-secondary">
+                                        Manage Categories
+                                    </a>
+
+                                    <form asp-controller="Event"
+                                          asp-action="Delete"
+                                          asp-route-id="@eventItem.EventID"
+                                          method="post"
+                                          onsubmit="return confirm('Are you sure you want to delete this event?');">
+
+                                        @Html.AntiForgeryToken()
+
+                                        <button type="submit" class="btn-danger">
+                                            Delete
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+                    }
+
+                </div>
+                
+
+            </div>
+        }
+        else
+        {
+            <div class="dashboard-empty">
+                <h3>No events created yet</h3>
+                <p>Your events will appear here once you create them.</p>
+                <a asp-controller="Event"
+                   asp-action="Create"
+                   class="btn-primary">
+                    Create Your First Event
+                </a>
+            </div>
+        }
+
+    </section>
+
+    <section class="dashboard-panel">
+
+        <div class="panel-heading">
+            <div>
+                <h2>Organisation Profile</h2>
+                <p>Your organisation's registered information.</p>
+            </div>
+        </div>
+
+        <div class="profile-details">
+
+            <div>
+                <span>Organisation</span>
+                <strong>@Model.Profile.OrganizationName</strong>
+            </div>
+
+            <div>
+                <span>Username</span>
+                <strong>@Model.Profile.UserName</strong>
+            </div>
+
+            <div>
+                <span>Email</span>
+                <strong>@Model.Profile.Email</strong>
+            </div>
+
+            <div>
+                <span>Phone Number</span>
+                <strong>@Model.Profile.PhoneNumber</strong>
+            </div>
+
+            <div>
+                <span>Address</span>
+                <strong>@Model.Profile.Address</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

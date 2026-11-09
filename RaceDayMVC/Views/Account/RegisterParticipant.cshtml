@@ -1,0 +1,128 @@
+﻿@model RaceDayMVC.Models.ParticipantRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Participant Registration";
+}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+                <span class="section-label">PARTICIPANT REGISTRATION</span>
+
+                <h1>Join the community.</h1>
+
+                <p>
+                    Create your participant account and start
+                    discovering sporting events.
+                </p>
+            </div>
+
+            <form asp-controller="Account"
+                  asp-action="RegisterParticipant"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="validation-summary">
+                </div>
+
+                <h3 class="form-section-title">Account Information</h3>
+
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName"
+                           class="form-input"
+                           autocomplete="username" />
+                    <span asp-validation-for="UserName"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserEmail"></label>
+                    <input asp-for="UserEmail"
+                           class="form-input"
+                           autocomplete="email" />
+                    <span asp-validation-for="UserEmail"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password"
+                           class="form-input"
+                           autocomplete="new-password" />
+                    <span asp-validation-for="Password"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword"
+                           class="form-input"
+                           autocomplete="new-password" />
+                    <span asp-validation-for="ConfirmPassword"
+                          class="field-validation"></span>
+                </div>
+
+                <h3 class="form-section-title">Personal Information</h3>
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-input" />
+                    <span asp-validation-for="Name"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Surname"></label>
+                    <input asp-for="Surname" class="form-input" />
+                    <span asp-validation-for="Surname"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Age"></label>
+                    <input asp-for="Age" class="form-input" />
+                    <span asp-validation-for="Age"
+                          class="field-validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber"
+                           class="form-input"
+                           autocomplete="tel" />
+                    <span asp-validation-for="PhoneNumber"
+                          class="field-validation"></span>
+                </div>
+
+                <button type="submit" class="auth-submit">
+                    Create Participant Account
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+                <span>Already registered?</span>
+            </div>
+
+            <a asp-controller="Account"
+               asp-action="Login"
+               class="auth-register">
+                Sign in
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
